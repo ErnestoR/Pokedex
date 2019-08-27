@@ -1,5 +1,5 @@
 import { combineEpics, ofType } from "redux-observable";
-import { mergeMap, map } from "rxjs/operators";
+import { delay, mergeMap, map } from "rxjs/operators";
 import api from "api/pokemon";
 
 // Actions
@@ -48,9 +48,10 @@ const fetchPokemonEpic = action$ => {
   return action$.pipe(
     ofType(POKEMON_LIST_FETCH_REQUEST),
     mergeMap(action =>
-      api
-        .fetchPokemonList(action.payload)
-        .pipe(map(payload => ({ type: POKEMON_LIST_FETCH_SUCCESS, payload })))
+      api.fetchPokemonList(action.payload).pipe(
+        delay(1000), // REMOVE ME??? it adds a nice animation since data is quite fast
+        map(payload => ({ type: POKEMON_LIST_FETCH_SUCCESS, payload }))
+      )
     )
   );
 };

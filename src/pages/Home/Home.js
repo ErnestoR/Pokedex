@@ -1,13 +1,8 @@
 import React from "react";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Paper,
-  CircularProgress
-} from "@material-ui/core";
+import { Paper, CircularProgress } from "@material-ui/core";
 
 import SearchBar from "components/SearchBar";
+import PokemonList from "components/PokemonList";
 import useStyles from "./styles";
 
 const Home = props => {
@@ -26,16 +21,10 @@ const Home = props => {
       <Paper className={classes.root}>
         {props.loading ? (
           <div className={classes.loadingContainer}>
-            <CircularProgress disableShrink />
+            <CircularProgress />
           </div>
         ) : (
-          <List className={classes.list}>
-            {props.list.map(item => (
-              <ListItem key={item.name} button>
-                <ListItemText primary={item.name} />
-              </ListItem>
-            ))}
-          </List>
+          <PokemonList data={props.list} />
         )}
       </Paper>
     </>
