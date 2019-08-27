@@ -1,25 +1,9 @@
 import React from "react";
-import { Paper, Typography } from "@material-ui/core";
-import SearchBar from "components/SearchBar";
-import useStyles from "./styles";
+
+import HomeContainer from "containers/Home";
 
 const Home = props => {
-  const classes = useStyles();
-
-  return (
-    <>
-      <SearchBar
-        inputProps={{
-          placeholder: "Search PokeApi"
-        }}
-      />
-      <Paper className={classes.root}>
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          Home
-        </Typography>
-      </Paper>
-    </>
-  );
+  return <HomeContainer />;
 };
 
 export default Home;
