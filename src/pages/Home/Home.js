@@ -1,5 +1,12 @@
 import React from "react";
-import { Paper, Typography } from "@material-ui/core";
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  CircularProgress
+} from "@material-ui/core";
+
 import SearchBar from "components/SearchBar";
 import useStyles from "./styles";
 
@@ -17,9 +24,19 @@ const Home = props => {
         }}
       />
       <Paper className={classes.root}>
-        <Typography component="h2" variant="h6" color="primary" gutterBottom>
-          Home
-        </Typography>
+        {props.loading ? (
+          <div className={classes.loadingContainer}>
+            <CircularProgress disableShrink />
+          </div>
+        ) : (
+          <List className={classes.list}>
+            {props.list.map(item => (
+              <ListItem key={item.name} button>
+                <ListItemText primary={item.name} />
+              </ListItem>
+            ))}
+          </List>
+        )}
       </Paper>
     </>
   );

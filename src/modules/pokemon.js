@@ -8,7 +8,7 @@ const POKEMON_LIST_FETCH_SUCCESS = "POKEMON_LIST_FETCH_SUCCESS";
 
 // Reducer
 const initialState = {
-  pending: false,
+  loading: false,
   error: null,
   list: []
 };

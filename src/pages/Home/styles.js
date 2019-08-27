@@ -7,5 +7,19 @@ export default makeStyles(theme => ({
   },
   listContainer: {
     padding: theme.spacing(2)
+  },
+  loadingContainer: {
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    marginTop: theme.spacing(6)
+  },
+
+  list: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    position: "relative",
+    overflow: "auto",
+    maxHeight: 300
   }
 }));
