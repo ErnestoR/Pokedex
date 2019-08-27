@@ -1,6 +1,7 @@
 import React from "react";
 import { ListItem, ListItemText } from "@material-ui/core";
 import { FixedSizeList } from "react-window";
+import { Link } from "react-router-dom";
 
 import useStyles from "./styles";
 
@@ -8,7 +9,14 @@ function Row(props) {
   const { index, data, style } = props;
 
   return (
-    <ListItem button style={style} key={index}>
+    <ListItem
+      button
+      style={style}
+      key={index}
+      divider
+      component={Link}
+      to={`/pokemon/${index}`}
+    >
       <ListItemText primary={data[index].name} />
     </ListItem>
   );

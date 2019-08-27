@@ -9,15 +9,13 @@ const SearchBar = props => {
 
   return (
     <Paper className={classes.root}>
+      <SearchIcon />
+      <Divider className={classes.divider} orientation="vertical" />
       <InputBase
         className={classes.input}
         inputProps={{ "aria-label": "search google maps" }}
         {...inputProps}
       />
-      <Divider className={classes.divider} orientation="vertical" />
-      <IconButton {...iconProps}>
-        <SearchIcon />
-      </IconButton>
     </Paper>
   );
 };
