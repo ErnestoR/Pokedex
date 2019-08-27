@@ -5,7 +5,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { AnimatedSwitch } from "react-router-transition";
 
 import theme from "./theme";
-import Dashboard from "./components/Dashboard";
+import Dashboard from "components/Dashboard";
 import Home from "./routes/Home";
 import About from "./routes/About";
 import "./App.css";

@@ -1,16 +1,6 @@
 import React from "react";
 import { Paper, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    minHeight: 300,
-    padding: theme.spacing(2)
-  },
-  listContainer: {
-    padding: theme.spacing(2)
-  }
-}));
+import useStyles from "./styles";
 
 const builtWith = [
   {
