@@ -1,34 +1,37 @@
 import { combineEpics, ofType } from "redux-observable";
-import { delay, mapTo } from "rxjs/operators";
+import { mergeMap, map } from "rxjs/operators";
+import api from "api/pokemon";
+
 // Actions
-const POKEMON_FETCH_REQUEST = "POKEMON_FETCH_REQUEST";
-const POKEMON_FETCH_SUCCESS = "POKEMON_FETCH_SUCCESS";
+const POKEMON_LIST_FETCH_REQUEST = "POKEMON_LIST_FETCH_REQUEST";
+const POKEMON_LIST_FETCH_SUCCESS = "POKEMON_LIST_FETCH_SUCCESS";
 
 // Reducer
 const initialState = {
   pending: false,
   error: null,
-  data: []
+  list: []
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case POKEMON_FETCH_REQUEST: {
-      console.log("reducer");
-
+    case POKEMON_LIST_FETCH_REQUEST: {
       return {
         ...state,
         error: null,
-        pending: true
+        loading: true
       };
     }
 
-    case POKEMON_FETCH_SUCCESS: {
-      console.log("reducer POKEMON_FETCH_SUCCESS");
+    case POKEMON_LIST_FETCH_SUCCESS: {
+      const { results, count } = action.payload;
+
       return {
         ...state,
         error: null,
-        pending: false
+        loading: false,
+        list: [...results],
+        count
       };
     }
     default:
@@ -37,15 +40,18 @@ export default (state = initialState, action) => {
 };
 
 // Action Creators
-export const fetchPokemon = () => ({
-  type: POKEMON_FETCH_REQUEST
+export const fetchPokemonList = () => ({
+  type: POKEMON_LIST_FETCH_REQUEST
 });
 
 const fetchPokemonEpic = action$ => {
   return action$.pipe(
-    ofType(POKEMON_FETCH_REQUEST),
-    delay(1000),
-    mapTo({ type: POKEMON_FETCH_SUCCESS })
+    ofType(POKEMON_LIST_FETCH_REQUEST),
+    mergeMap(action =>
+      api
+        .fetchPokemonList(action.payload)
+        .pipe(map(payload => ({ type: POKEMON_LIST_FETCH_SUCCESS, payload })))
+    )
   );
 };
 
