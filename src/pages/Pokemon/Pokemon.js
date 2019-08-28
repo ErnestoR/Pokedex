@@ -69,20 +69,26 @@ const Pokemon = props => {
         </Grid>
       </Card>
 
-      <Card className={classes.list}>
-        <List subheader={<ListSubheader>Abilities</ListSubheader>}>
+      <Card className={classes.listContainer}>
+        <Typography variant="h6" color="textSecondary">
+          Abilities
+        </Typography>
+        <List>
           {data.abilities.map(({ ability }) => (
-            <ListItem key={ability.name} button>
+            <ListItem key={ability.name} button divider>
               <ListItemText primary={ability.name} />
             </ListItem>
           ))}
         </List>
       </Card>
 
-      <Card className={classes.list}>
-        <List subheader={<ListSubheader>Moves</ListSubheader>}>
+      <Card className={classes.listContainer}>
+        <Typography variant="h6" color="textSecondary">
+          Moves
+        </Typography>
+        <List className={classes.list}>
           {data.moves.map(({ move, version_group_details }) => (
-            <ListItem key={move.name} button>
+            <ListItem key={move.name} button divider>
               <ListItemText
                 primary={move.name}
                 secondary={version_group_details[0].move_learn_method.name}

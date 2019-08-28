@@ -9,10 +9,13 @@ export default makeStyles(theme => ({
     width: 200,
     height: 200
   },
-  list: {
+  listContainer: {
     padding: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    maxHeight: 300,
-    overflow: "auto"
+    marginBottom: theme.spacing(3)
+  },
+
+  list: {
+    overflow: "auto",
+    maxHeight: 300
   }
 }));
