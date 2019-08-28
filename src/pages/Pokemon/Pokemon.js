@@ -13,15 +13,16 @@ import {
 import capitalize from "lodash/capitalize";
 import useStyles from "./styles";
 
-import data from "./data.json";
-
 const Pokemon = props => {
   const classes = useStyles();
+  const { data, loading } = props;
+
+  if (loading || !data) {
+    return <div>loading</div>;
+  }
 
   const stats = data.stats;
   const pokemonName = capitalize(data.name);
-
-  console.log({ data });
 
   return (
     <>
@@ -99,6 +100,12 @@ const Pokemon = props => {
       </Card>
     </>
   );
+};
+
+Pokemon.defaultProps = {
+  // data: {
+  //   stats: {}
+  // }
 };
 
 export default Pokemon;

@@ -33,7 +33,7 @@ const Home = props => {
         }}
       />
       <Paper className={classes.root}>
-        {loading ? (
+        {loading || !data ? (
           <div className={classes.loadingContainer}>
             <CircularProgress />
           </div>

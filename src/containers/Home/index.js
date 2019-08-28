@@ -6,7 +6,7 @@ import Home from "pages/Home";
 
 const mapStateToProps = state => ({
   list: state.pokemon.list,
-  loading: state.pokemon.loading
+  loading: state.pokemon.loadingList
 });
 const mapDispathToProps = dispatch => {
   return {

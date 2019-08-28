@@ -15,7 +15,7 @@ function Row(props) {
       key={index}
       divider
       component={Link}
-      to={`/pokemon/${index}`}
+      to={`/pokemon/${data[index].name}`}
     >
       <ListItemText primary={data[index].name} />
     </ListItem>

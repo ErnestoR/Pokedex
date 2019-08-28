@@ -6,11 +6,16 @@ import api from "api/pokemon";
 const POKEMON_LIST_FETCH_REQUEST = "POKEMON_LIST_FETCH_REQUEST";
 const POKEMON_LIST_FETCH_SUCCESS = "POKEMON_LIST_FETCH_SUCCESS";
 
+const POKEMON_FETCH_REQUEST = "POKEMON_FETCH_REQUEST";
+const POKEMON_FETCH_SUCCESS = "POKEMON_FETCH_SUCCESS";
+
 // Reducer
 const initialState = {
-  loading: false,
+  loadingList: false,
+  loadingPokemon: false,
   error: null,
-  list: []
+  list: [],
+  pokemons: {}
 };
 
 export default (state = initialState, action) => {
@@ -19,19 +24,42 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        loading: true
+        loadingList: true
       };
     }
-
     case POKEMON_LIST_FETCH_SUCCESS: {
       const { results, count } = action.payload;
 
       return {
         ...state,
         error: null,
-        loading: false,
+        loadingList: false,
         list: [...results],
         count
+      };
+    }
+    case POKEMON_FETCH_REQUEST: {
+      return {
+        ...state,
+        error: null,
+        loadingPokemon: true
+      };
+    }
+    case POKEMON_FETCH_SUCCESS: {
+      const newPokemon = action.payload;
+
+      const mergedPokemons = {
+        ...state.pokemons,
+        [newPokemon.name]: {
+          ...newPokemon
+        }
+      };
+
+      return {
+        ...state,
+        error: null,
+        loadingPokemon: false,
+        pokemons: mergedPokemons
       };
     }
     default:
@@ -44,16 +72,32 @@ export const fetchPokemonList = () => ({
   type: POKEMON_LIST_FETCH_REQUEST
 });
 
-const fetchPokemonEpic = action$ => {
+export const fetchPokemon = id => ({
+  type: POKEMON_FETCH_REQUEST,
+  payload: id
+});
+
+// Epics
+const fetchPokemonListEpic = action$ => {
   return action$.pipe(
     ofType(POKEMON_LIST_FETCH_REQUEST),
     mergeMap(action =>
-      api.fetchPokemonList(action.payload).pipe(
-        delay(1000), // REMOVE ME??? it adds a nice animation since data is quite fast
-        map(payload => ({ type: POKEMON_LIST_FETCH_SUCCESS, payload }))
-      )
+      api
+        .fetchPokemonList(action.payload)
+        .pipe(map(payload => ({ type: POKEMON_LIST_FETCH_SUCCESS, payload })))
     )
   );
 };
 
-export const pokemonEpic = combineEpics(fetchPokemonEpic);
+const fetchPokemonEpic = action$ => {
+  return action$.pipe(
+    ofType(POKEMON_FETCH_REQUEST),
+    mergeMap(action =>
+      api
+        .fetchPokemonByID(action.payload)
+        .pipe(map(payload => ({ type: POKEMON_FETCH_SUCCESS, payload })))
+    )
+  );
+};
+
+export const pokemonEpic = combineEpics(fetchPokemonListEpic, fetchPokemonEpic);
