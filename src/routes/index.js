@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 
 import Home from "routes/Home";
 import About from "routes/About";
+import Pokemon from "routes/Pokemon";
 import "./animateRoutes.css";
 
 const Routes = () => {
@@ -21,7 +22,8 @@ const Routes = () => {
       className="switch-wrapper"
     >
       <Route exact path="/" component={Home} />
-      <Route exact path="/about" component={About} />
+      <Route path="/about" component={About} />
+      <Route path="/pokemon/:id" component={Pokemon} />
     </AnimatedSwitch>
   );
 };
