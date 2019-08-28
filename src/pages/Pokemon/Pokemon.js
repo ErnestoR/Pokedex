@@ -7,6 +7,8 @@ import {
   Typography
 } from "@material-ui/core";
 import PokemonDetails from "components/Details";
+import AbilitiesList from "components/AbilitiesList";
+
 import useStyles from "./styles";
 
 const Pokemon = props => {
@@ -20,18 +22,7 @@ const Pokemon = props => {
   return (
     <>
       <PokemonDetails data={data} />
-      <Card className={classes.listContainer}>
-        <Typography variant="h6" color="textSecondary">
-          Abilities
-        </Typography>
-        <List>
-          {data.abilities.map(({ ability }) => (
-            <ListItem key={ability.name} button divider>
-              <ListItemText primary={ability.name} />
-            </ListItem>
-          ))}
-        </List>
-      </Card>
+      <AbilitiesList data={data} />
 
       <Card className={classes.listContainer}>
         <Typography variant="h6" color="textSecondary">
