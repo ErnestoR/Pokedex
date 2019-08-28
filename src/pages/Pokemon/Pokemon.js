@@ -1,18 +1,10 @@
 import React from "react";
-import {
-  Card,
-  List,
-  ListItem,
-  ListItemText,
-  Typography
-} from "@material-ui/core";
+
 import PokemonDetails from "components/Details";
 import AbilitiesList from "components/AbilitiesList";
-
-import useStyles from "./styles";
+import MovesList from "components/MovesList";
 
 const Pokemon = props => {
-  const classes = useStyles();
   const { data, loading } = props;
 
   if (loading || !data) {
@@ -23,30 +15,9 @@ const Pokemon = props => {
     <>
       <PokemonDetails data={data} />
       <AbilitiesList data={data} />
-
-      <Card className={classes.listContainer}>
-        <Typography variant="h6" color="textSecondary">
-          Moves
-        </Typography>
-        <List className={classes.list}>
-          {data.moves.map(({ move, version_group_details }) => (
-            <ListItem key={move.name} button divider>
-              <ListItemText
-                primary={move.name}
-                secondary={version_group_details[0].move_learn_method.name}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </Card>
+      <MovesList data={data} />
     </>
   );
-};
-
-Pokemon.defaultProps = {
-  // data: {
-  //   stats: {}
-  // }
 };
 
 export default Pokemon;
