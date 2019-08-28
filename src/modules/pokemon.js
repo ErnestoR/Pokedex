@@ -1,5 +1,5 @@
 import { combineEpics, ofType } from "redux-observable";
-import { delay, mergeMap, map } from "rxjs/operators";
+import { mergeMap, map } from "rxjs/operators";
 import api from "api/pokemon";
 
 // Actions
