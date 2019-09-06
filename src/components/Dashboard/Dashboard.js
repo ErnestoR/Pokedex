@@ -65,7 +65,7 @@ export default function Dashboard(props) {
         }}
       >
         <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton aria-label="close drawer" onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>
         </div>
