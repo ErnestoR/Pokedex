@@ -7,7 +7,7 @@ import Pokemon from "pages/Pokemon";
 function getEvolutionChainIDFromSpecies(species) {
   const evolutionChainURL = "https://pokeapi.co/api/v2/evolution-chain/";
 
-  return species.evolution_chain.url.split(evolutionChainURL)[1].slice(0, 1);
+  return species.evolution_chain.url.split(evolutionChainURL)[1].slice(0, -1);
 }
 
 const mapStateToProps = state => ({
