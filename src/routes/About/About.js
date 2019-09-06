@@ -25,7 +25,11 @@ const About = props => {
   return (
     <Paper className={classes.root}>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Built with <span role="img">❤️</span>️ using:
+        Built with{" "}
+        <span role="img" aria-label="heart">
+          ❤️
+        </span>
+        ️ using:
       </Typography>
       <div className={classes.listContainer}>
         {builtWith.map(({ name }) => (
