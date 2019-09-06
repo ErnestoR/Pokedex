@@ -8,19 +8,14 @@ import {
   Typography
 } from "@material-ui/core";
 import capitalize from "lodash/capitalize";
-
-function getFlavorTextEntrieforLanguage(species, language) {
-  return species.flavor_text_entries.find(
-    entree => entree.language.name === language
-  );
-}
+import { getFlavorTextEntreeByLanguage } from "utils";
 
 const Details = props => {
   const classes = useStyles();
   const { data, species } = props;
   const stats = data.stats;
   const pokemonName = capitalize(data.name);
-  const { flavor_text } = getFlavorTextEntrieforLanguage(species, "en");
+  const { flavor_text } = getFlavorTextEntreeByLanguage(species, "en");
 
   return (
     <>

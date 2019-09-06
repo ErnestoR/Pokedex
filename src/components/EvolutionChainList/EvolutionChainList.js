@@ -10,34 +10,14 @@ import {
   ListSubheader,
   Typography
 } from "@material-ui/core";
-
-function getEvolvesToFromChain(chain, name) {
-  // no evolution
-  if (!chain.evolves_to) {
-    return [];
-  }
-
-  // 1st level
-  if (chain.species.name === name) {
-    return chain.evolves_to;
-  }
-
-  // 2nd level
-  const secondLevel = chain.evolves_to[0];
-  if (secondLevel.species.name === name) {
-    return secondLevel.evolves_to;
-  }
-
-  // 3rd level will always be empty
-  return [];
-}
+import { getEvolvesToFromChainByName } from "utils";
 
 const EvolutionChainList = props => {
   const classes = useStyles();
   const { evolutionChain, species } = props;
   const { chain = {} } = evolutionChain;
   const pokemonName = species.name;
-  const evolvesTo = getEvolvesToFromChain(chain, pokemonName);
+  const evolvesTo = getEvolvesToFromChainByName(chain, pokemonName);
 
   // No evolution tree
   if (!species.evolves_from_species && evolvesTo.length === 0) {
