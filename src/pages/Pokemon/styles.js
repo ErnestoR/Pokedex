@@ -1,17 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles(theme => ({
-  root: {
+  loadingRoot: {
     padding: theme.spacing(3),
-    marginBottom: theme.spacing(3)
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: "50vh"
   },
-  listContainer: {
-    padding: theme.spacing(3),
-    marginBottom: theme.spacing(3)
-  },
-
-  list: {
-    overflow: "auto",
-    maxHeight: 300
+  loadingText: {
+    marginTop: theme.spacing(3)
   }
 }));
