@@ -10,7 +10,7 @@ const Pokemon = props => {
   const { data, loading } = props;
   const classes = useStyles();
 
-  if (loading || !data) {
+  if (loading || !data.pokemon) {
     return (
       <div className={classes.loadingRoot}>
         <CircularProgress />
@@ -27,9 +27,9 @@ const Pokemon = props => {
 
   return (
     <>
-      <PokemonDetails data={data} />
-      <AbilitiesList data={data} />
-      <MovesList data={data} />
+      <PokemonDetails data={data.pokemon} species={data.species} />
+      <AbilitiesList data={data.pokemon} />
+      <MovesList data={data.pokemon} />
     </>
   );
 };

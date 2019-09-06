@@ -4,8 +4,16 @@ import { connect } from "react-redux";
 import { fetchPokemon } from "modules/pokemon";
 import Pokemon from "pages/Pokemon";
 
+function getEvolutionChainIDFromSpecies(species) {
+  const evolutionChainURL = "https://pokeapi.co/api/v2/evolution-chain/";
+
+  return species.evolution_chain.url.split(evolutionChainURL)[1].slice(0, 1);
+}
+
 const mapStateToProps = state => ({
   pokemons: state.pokemon.pokemons,
+  species: state.pokemon.species,
+  evolutionChain: state.pokemon.evolutionChain,
   loading: state.pokemon.loadingPokemon
 });
 const mapDispathToProps = dispatch => {
@@ -14,11 +22,22 @@ const mapDispathToProps = dispatch => {
   };
 };
 
-const PokemonContainer = ({ loadPokemon, match, pokemons, ...props }) => {
+const PokemonContainer = ({
+  loadPokemon,
+  match,
+  pokemons,
+  species,
+  evolutionChain,
+  ...props
+}) => {
   const {
     params: { id }
   } = match;
   const searchedPokemon = pokemons[id];
+  const searchedSpecies = species[id];
+  const searchedEvolutionChain =
+    searchedSpecies &&
+    evolutionChain[getEvolutionChainIDFromSpecies(searchedSpecies)];
 
   useEffect(() => {
     if (!searchedPokemon) {
@@ -26,7 +45,16 @@ const PokemonContainer = ({ loadPokemon, match, pokemons, ...props }) => {
     }
   }, [id, loadPokemon, searchedPokemon]);
 
-  return <Pokemon data={searchedPokemon} {...props} />;
+  return (
+    <Pokemon
+      data={{
+        pokemon: searchedPokemon,
+        species: searchedSpecies,
+        evolutionChain: searchedEvolutionChain
+      }}
+      {...props}
+    />
+  );
 };
 
 export default connect(
