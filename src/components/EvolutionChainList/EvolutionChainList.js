@@ -39,8 +39,6 @@ const EvolutionChainList = props => {
   const pokemonName = species.name;
   const evolvesTo = getEvolvesToFromChain(chain, pokemonName);
 
-  console.log(props);
-
   // No evolution tree
   if (!species.evolves_from_species && evolvesTo.length === 0) {
     return null;

@@ -51,7 +51,7 @@ export default function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Pokedex
           </Typography>
         </Toolbar>
       </AppBar>
