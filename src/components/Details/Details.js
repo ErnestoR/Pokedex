@@ -9,11 +9,18 @@ import {
 } from "@material-ui/core";
 import capitalize from "lodash/capitalize";
 
+function getFlavorTextEntrieforLanguage(species, language) {
+  return species.flavor_text_entries.find(
+    entree => entree.language.name === language
+  );
+}
+
 const Details = props => {
   const classes = useStyles();
   const { data, species } = props;
   const stats = data.stats;
   const pokemonName = capitalize(data.name);
+  const { flavor_text } = getFlavorTextEntrieforLanguage(species, "en");
 
   return (
     <>
@@ -30,7 +37,7 @@ const Details = props => {
             />
             <CardContent>
               <Typography variant="body1" color="textSecondary">
-                {species.flavor_text_entries[1].flavor_text}
+                {flavor_text}
               </Typography>
             </CardContent>
           </Grid>
