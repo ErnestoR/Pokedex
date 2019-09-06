@@ -11,11 +11,25 @@ const api = {
     return from(request);
   },
   fetchPokemonByID: id => {
-    const request = fetch(`${API_URL}/pokemon/${id}`).then(response => {
-      return response.json();
-    });
+    const request = fetch(`${API_URL}/pokemon/${id}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(api.fetchPokemonSpecies)
+      .then(api.fetchPokemonEvolutionChain);
 
     return from(request);
+  },
+
+  fetchPokemonSpecies: pokemon =>
+    fetch(pokemon.species.url)
+      .then(response => response.json())
+      .then(species => ({ pokemon, species })),
+
+  fetchPokemonEvolutionChain: ({ pokemon, species }) => {
+    return fetch(species.evolution_chain.url)
+      .then(response => response.json())
+      .then(evolutionChain => ({ pokemon, species, evolutionChain }));
   }
 };
 

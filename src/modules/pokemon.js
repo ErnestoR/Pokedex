@@ -15,7 +15,9 @@ const initialState = {
   loadingPokemon: false,
   error: null,
   list: [],
-  pokemons: {}
+  pokemons: {},
+  species: {},
+  evolutionChain: {}
 };
 
 export default (state = initialState, action) => {
@@ -46,12 +48,24 @@ export default (state = initialState, action) => {
       };
     }
     case POKEMON_FETCH_SUCCESS: {
-      const newPokemon = action.payload;
+      const { pokemon, species, evolutionChain } = action.payload;
 
       const mergedPokemons = {
         ...state.pokemons,
-        [newPokemon.name]: {
-          ...newPokemon
+        [pokemon.name]: {
+          ...pokemon
+        }
+      };
+      const mergedSpecies = {
+        ...state.species,
+        [species.name]: {
+          ...species
+        }
+      };
+      const mergedEvolutionChain = {
+        ...state.evolutionChain,
+        [evolutionChain.id]: {
+          ...evolutionChain
         }
       };
 
@@ -59,7 +73,9 @@ export default (state = initialState, action) => {
         ...state,
         error: null,
         loadingPokemon: false,
-        pokemons: mergedPokemons
+        pokemons: mergedPokemons,
+        species: mergedSpecies,
+        evolutionChain: mergedEvolutionChain
       };
     }
     default:
