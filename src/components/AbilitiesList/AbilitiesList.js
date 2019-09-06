@@ -28,4 +28,10 @@ const AbilitiesList = props => {
   );
 };
 
+AbilitiesList.defaultProps = {
+  data: {
+    abilities: []
+  }
+};
+
 export default AbilitiesList;
