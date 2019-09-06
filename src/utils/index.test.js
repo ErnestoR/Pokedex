@@ -90,3 +90,38 @@ describe("getEvolvesToFromChainByName", () => {
     });
   });
 });
+
+describe("getFlavorTextEntreeByLanguage", () => {
+  const species = {
+    flavor_text_entries: [
+      {
+        flavor_text:
+          "The question of why only Eevee has such\nunstable genes has still not been solved.",
+        language: { name: "en" }
+      },
+      {
+        flavor_text:
+          "Todavía no se ha esclarecido el motivo por el\nque es el único Pokémon que presenta un\ncódigo genético inestable.",
+        language: { name: "es" }
+      }
+    ]
+  };
+
+  it("correctly returns english", () => {
+    const text = getFlavorTextEntreeByLanguage(species, "en");
+
+    expect(text.flavor_text).toBe(
+      "The question of why only Eevee has such\nunstable genes has still not been solved."
+    );
+    expect(text.language.name).toBe("en");
+  });
+
+  it("correctly returns spanish", () => {
+    const text = getFlavorTextEntreeByLanguage(species, "es");
+
+    expect(text.flavor_text).toBe(
+      "Todavía no se ha esclarecido el motivo por el\nque es el único Pokémon que presenta un\ncódigo genético inestable."
+    );
+    expect(text.language.name).toBe("es");
+  });
+});
