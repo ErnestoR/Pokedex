@@ -30,7 +30,10 @@ const EvolutionChainList = props => {
         Evolutions
       </Typography>
       {species.evolves_from_species && (
-        <List subheader={<ListSubheader>Evolves from</ListSubheader>}>
+        <List
+          subheader={<ListSubheader>Evolves from</ListSubheader>}
+          data-testid="evolution-chain-from"
+        >
           <ListItem
             button
             divider
@@ -50,6 +53,7 @@ const EvolutionChainList = props => {
               Evolves to
             </ListSubheader>
           }
+          data-testid="evolution-chain-to"
         >
           {evolvesTo.map((evolution, index) => (
             <ListItem
@@ -69,7 +73,8 @@ const EvolutionChainList = props => {
 };
 
 EvolutionChainList.defaultProps = {
-  evolutionChain: {}
+  evolutionChain: {},
+  species: {}
 };
 
 export default EvolutionChainList;
