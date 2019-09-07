@@ -13,7 +13,7 @@ const SearchBar = props => {
       <Divider className={classes.divider} orientation="vertical" />
       <InputBase
         className={classes.input}
-        inputProps={{ "aria-label": "search google maps" }}
+        inputProps={{ "aria-label": "search pokedex" }}
         {...inputProps}
       />
     </Paper>
