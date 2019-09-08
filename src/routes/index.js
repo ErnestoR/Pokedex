@@ -2,9 +2,9 @@ import React from "react";
 import { AnimatedSwitch } from "react-router-transition";
 import { Route } from "react-router-dom";
 
-import Home from "routes/Home";
-import About from "routes/About";
-import Pokemon from "routes/Pokemon";
+import Home from "containers/Home";
+import Pokemon from "containers/Pokemon";
+import About from "pages/About";
 import "./animateRoutes.css";
 
 const Routes = () => {
