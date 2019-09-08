@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchPokemonList } from "modules/pokemon";
 import Home from "pages/Home";
@@ -6,12 +6,13 @@ import Home from "pages/Home";
 const HomeContainer = ({ ...props }) => {
   const { list, loading } = useSelector(state => state.pokemon);
   const dispatch = useDispatch();
+  const loadList = useCallback(() => dispatch(fetchPokemonList()), [dispatch]);
 
   useEffect(() => {
     if (list.length === 0) {
-      dispatch(fetchPokemonList());
+      loadList();
     }
-  }, [dispatch, list]);
+  }, [loadList, list]);
 
   return <Home list={list} loading={loading} {...props} />;
 };

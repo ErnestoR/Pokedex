@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-
+import React, { useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { fetchPokemon } from "modules/pokemon";
 import Pokemon from "pages/Pokemon";
 
@@ -10,26 +9,10 @@ function getEvolutionChainIDFromSpecies(species) {
   return species.evolution_chain.url.split(evolutionChainURL)[1].slice(0, -1);
 }
 
-const mapStateToProps = state => ({
-  pokemons: state.pokemon.pokemons,
-  species: state.pokemon.species,
-  evolutionChain: state.pokemon.evolutionChain,
-  loading: state.pokemon.loadingPokemon
-});
-const mapDispathToProps = dispatch => {
-  return {
-    loadPokemon: id => dispatch(fetchPokemon(id))
-  };
-};
-
-const PokemonContainer = ({
-  loadPokemon,
-  match,
-  pokemons,
-  species,
-  evolutionChain,
-  ...props
-}) => {
+const PokemonContainer = ({ match, ...props }) => {
+  const { pokemons, species, evolutionChain, loading } = useSelector(
+    state => state.pokemon
+  );
   const {
     params: { id }
   } = match;
@@ -38,6 +21,8 @@ const PokemonContainer = ({
   const searchedEvolutionChain =
     searchedSpecies &&
     evolutionChain[getEvolutionChainIDFromSpecies(searchedSpecies)];
+  const dispatch = useDispatch();
+  const loadPokemon = useCallback(id => dispatch(fetchPokemon(id)), [dispatch]);
 
   useEffect(() => {
     if (!searchedPokemon) {
@@ -47,6 +32,7 @@ const PokemonContainer = ({
 
   return (
     <Pokemon
+      loading={loading}
       data={{
         pokemon: searchedPokemon,
         species: searchedSpecies,
@@ -57,7 +43,4 @@ const PokemonContainer = ({
   );
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(PokemonContainer);
+export default PokemonContainer;
