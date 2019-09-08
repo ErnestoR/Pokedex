@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import useStyles from "./styles";
 
-function Row(props) {
+export function Row(props) {
   const { index, data, style } = props;
 
   return (
