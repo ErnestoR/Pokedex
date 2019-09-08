@@ -8,7 +8,7 @@ import {
   Typography
 } from "@material-ui/core";
 
-const AbilitiesList = props => {
+const MovesList = props => {
   const classes = useStyles();
   const { data } = props;
 
@@ -31,4 +31,8 @@ const AbilitiesList = props => {
   );
 };
 
-export default AbilitiesList;
+MovesList.defaultProps = {
+  data: { moves: [] }
+};
+
+export default MovesList;
