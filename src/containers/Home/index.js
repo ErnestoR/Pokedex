@@ -1,30 +1,19 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import { fetchPokemonList } from "modules/pokemon";
 import Home from "pages/Home";
 
-const mapStateToProps = state => ({
-  list: state.pokemon.list,
-  loading: state.pokemon.loadingList
-});
-const mapDispathToProps = dispatch => {
-  return {
-    loadList: () => dispatch(fetchPokemonList())
-  };
-};
+const HomeContainer = ({ ...props }) => {
+  const { list, loading } = useSelector(state => state.pokemon);
+  const dispatch = useDispatch();
 
-const HomeContainer = ({ loadList, list, ...props }) => {
   useEffect(() => {
     if (list.length === 0) {
-      loadList();
+      dispatch(fetchPokemonList());
     }
-  }, [loadList, list]);
+  }, [dispatch, list]);
 
-  return <Home list={list} {...props} />;
+  return <Home list={list} loading={loading} {...props} />;
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispathToProps
-)(HomeContainer);
+export default HomeContainer;
