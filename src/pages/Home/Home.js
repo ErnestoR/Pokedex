@@ -32,10 +32,10 @@ const Home = props => {
           onChange: onSearchChange
         }}
       />
-      <Paper className={classes.root}>
+      <Paper className={classes.root} data-testid="pokemon-list-container">
         {loading || !data ? (
           <div className={classes.loadingContainer}>
-            <CircularProgress />
+            <CircularProgress data-testid="loading-progress" />
           </div>
         ) : (
           <PokemonList data={data} />
