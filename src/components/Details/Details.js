@@ -16,7 +16,7 @@ const Details = props => {
   const stats = data.stats;
   const pokemonName = capitalize(data.name);
   const entree = getFlavorTextEntreeByLanguage(species, "en");
-  const flavor_text = entree.flavor_text.replace("\n", " ");
+  const flavor_text = entree && entree.flavor_text.replace("\n", " ");
 
   return (
     <>
