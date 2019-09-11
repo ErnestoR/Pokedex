@@ -27,7 +27,7 @@ const Pokemon = props => {
   }
 
   return (
-    <>
+    <div className={classes.root}>
       <PokemonDetails data={data.pokemon} species={data.species} />
       <EvolutionChainList
         species={data.species}
@@ -35,7 +35,7 @@ const Pokemon = props => {
       />
       <AbilitiesList data={data.pokemon} />
       <MovesList data={data.pokemon} />
-    </>
+    </div>
   );
 };
 

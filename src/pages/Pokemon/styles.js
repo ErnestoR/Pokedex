@@ -11,5 +11,10 @@ export default makeStyles(theme => ({
   },
   loadingText: {
     marginTop: theme.spacing(3)
+  },
+
+  root: {
+    maxWidth: 600,
+    margin: "0 auto"
   }
 }));

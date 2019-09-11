@@ -25,14 +25,14 @@ const Home = props => {
   }
 
   return (
-    <>
+    <div className={classes.root}>
       <SearchBar
         inputProps={{
           placeholder: "Search PokeApi",
           onChange: onSearchChange
         }}
       />
-      <Paper className={classes.root} data-testid="pokemon-list-container">
+      <Paper className={classes.paper} data-testid="pokemon-list-container">
         {loading || !data ? (
           <div className={classes.loadingContainer}>
             <CircularProgress data-testid="loading-progress" />
@@ -41,7 +41,7 @@ const Home = props => {
           <PokemonList data={data} />
         )}
       </Paper>
-    </>
+    </div>
   );
 };
 
