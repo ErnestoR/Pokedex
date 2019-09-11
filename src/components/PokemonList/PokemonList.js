@@ -28,7 +28,7 @@ const Home = props => {
 
   return (
     <FixedSizeList
-      height={400}
+      height={600}
       itemSize={46}
       itemCount={data.length}
       className={classes.list}
